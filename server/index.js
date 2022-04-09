@@ -2,8 +2,15 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import mongoose from 'mongoose';
 import cors from 'cors';
+import movieRoutes from './routes/movies.js'; //router
+
+
 
 const app = express();
+
+app.use('/movies', movieRoutes);    // express middleware to connect it to our application
+//it says every route inside movieRoutes is going to be reached using /movies.
+
 
 
 //general setup of the app
@@ -26,6 +33,7 @@ app.use(cors());
 
 const connection_url = 'mongodb+srv://sajaad6399:HTMLu135dx@cluster0.ut8a7.mongodb.net/myMovies?retryWrites=true&w=majority';
 const PORT = process.env.PORT || 5000;
+
 
 mongoose.connect(connection_url, { useNewUrlParser: true, useUnifiedTopology: true })
     .then(() => app.listen(PORT, () => console.log(`server running on port: ${PORT}`)))
