@@ -1,17 +1,22 @@
-import React,{useEffect, useState} from "react";
+import React,{useEffect} from "react";
 import Layout from "./components/Main/Layout";
 import About from "./components/Main/About";
 import Home from "./components/Main/Home";
 import List from "./components/Main/List";
 import Create from "./components/Main/Create";
 import Details from "./components/Main/Details";
-//import { useDispatch } from 'react-redux';
-//import { getPosts } from './actions/posts';
+import { useDispatch } from 'react-redux';
+import { getMovies } from './actions/movies';
 import { BrowserRouter,Routes,Route } from "react-router-dom";
 
 
 const App = () => {
-   
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(getMovies());
+    }, [dispatch]);
+
     return (
         <BrowserRouter>
             <Routes>
