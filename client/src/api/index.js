@@ -1,5 +1,5 @@
 import axios from 'axios';
-const url = 'http://localhost:5000/movies';
+const url = 'https://movi-store.herokuapp.com/movies';
 
 export const fetchMovies = () => axios.get(url);
 export const createPost = (newPost) => axios.post(url, newPost);
