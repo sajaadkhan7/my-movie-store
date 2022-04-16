@@ -20,6 +20,7 @@ const Layout = () => {
                 style={{ maxHeight: 'auto' }}
                 navbarScroll>
                 
+                
                 <LinkContainer to="/">
                 <ReactBootstrap.Nav.Link>Home</ReactBootstrap.Nav.Link>
                 </LinkContainer>
