@@ -8,10 +8,10 @@ import logo from '../../images/movieStore_Logo.png';
 const Layout = () => {
     return (
         <>
-          <ReactBootstrap.Navbar style={{fontSize:'1.2rem'}} sticky="top" bg="dark" variant="dark" expand="md">
+          <ReactBootstrap.Navbar style={{fontSize:'1.1rem'}} sticky="top" bg="dark" variant="dark" expand="md">
           <ReactBootstrap.Container fluid>
              <LinkContainer to="/">
-              <ReactBootstrap.Navbar.Brand><ReactBootstrap.Image className="w-25"  src={logo}></ReactBootstrap.Image> <b  style={{fontSize:'1.3rem'}}>&nbsp;MovieStore</b></ReactBootstrap.Navbar.Brand>
+              <ReactBootstrap.Navbar.Brand><ReactBootstrap.Image className="w-25"  src={logo}></ReactBootstrap.Image> <b  style={{fontSize:'1.3rem'}}>&nbsp;MoviStore</b></ReactBootstrap.Navbar.Brand>
              </LinkContainer>          
              <ReactBootstrap.Navbar.Toggle aria-controls="navbarScroll" />
              <ReactBootstrap.Navbar.Collapse id="navbarScroll">
@@ -25,7 +25,7 @@ const Layout = () => {
                 </LinkContainer>
                
                 <LinkContainer to="/list" >
-                <ReactBootstrap.Nav.Link>List</ReactBootstrap.Nav.Link>
+                <ReactBootstrap.Nav.Link>Explore</ReactBootstrap.Nav.Link>
                 </LinkContainer>
                
                 <LinkContainer to="/create">
