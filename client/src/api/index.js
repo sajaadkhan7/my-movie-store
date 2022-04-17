@@ -1,6 +1,6 @@
 import axios from 'axios';
-const url = 'https://movi-store.herokuapp.com/movies';
-
+// const url = 'https://movi-store.herokuapp.com/movies';
+const url = 'http://localhost:5000/movies';
 export const fetchMovies = () => axios.get(url);
 export const createPost = (newPost) => axios.post(url, newPost);
 export const getSingle = (id) => axios.get(`${url}/${id}`);

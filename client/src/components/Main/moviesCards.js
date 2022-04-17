@@ -8,7 +8,7 @@ const MoviesCards = () => {
     return (
         <div className='container'>
              <h2 className="container mt-3"> New To Watch </h2>
-        <Row xs={1} sm={2}  lg={3} className="g-4">
+        <Row xs={1} sm={2}  lg={4} className="g-4">
   {Array.from({ length: 4 }).map((_, idx) => (
     <Col>
       <Card className='shadow-lg'>
