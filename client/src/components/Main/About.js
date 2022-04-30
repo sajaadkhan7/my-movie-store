@@ -6,10 +6,9 @@ const About = () => {
    
     return (
         <>
-        <h1 className="text-center m-3">About Us</h1>
+        {/* <h1 className="text-center m-3">About Us</h1> */}
             <ReactBS.Image className="img-fluid w-100"  src={HomeImg}></ReactBS.Image>
         </>
     )
 };
-
 export default About;

@@ -7,7 +7,7 @@ import B1 from '../../images/Banner_images.jpeg';
 import B2 from '../../images/Banner_images_1.png';
 import B3 from '../../images/Banner_images_2.png';
 
-import { Button, Carousel } from "react-bootstrap";
+import {  Carousel } from "react-bootstrap";
 import MoviesCards from "./moviesCards";
 
 
@@ -35,7 +35,7 @@ const Home = () => {
                     />
                     <Carousel.Caption>
                         <h3>Doctor Strange in the Multiverse of madness</h3>
-                        <a href="#" className="btn btn-light" >View Details</a>
+                        <a href="/movies/6262a2fbb04e07c484152922" className="btn btn-light" >View Details</a>
                     </Carousel.Caption>
                 </Carousel.Item>
                 <Carousel.Item>
@@ -47,7 +47,7 @@ const Home = () => {
 
                     <Carousel.Caption>
                         <h3>Sonic 2 The Hedgehog</h3>
-                        <a href="#" className="btn btn-light" >View Details</a>
+                        <a href="/movies/6262a6cdb04e07c484152939" className="btn btn-light" >View Details</a>
                     </Carousel.Caption>
                 </Carousel.Item>
                 <Carousel.Item>
@@ -58,7 +58,7 @@ const Home = () => {
                     />
                     <Carousel.Caption>
                         <h3>Fantastic Beasts The Secrets of Dumbledore</h3>
-                        <a href="#" className="btn btn-light" >View Details</a>
+                        <a href="/movies/6262a748b04e07c484152947" className="btn btn-light" >View Details</a>
                     </Carousel.Caption>
                 </Carousel.Item>
             </Carousel>

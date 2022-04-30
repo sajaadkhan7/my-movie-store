@@ -47,9 +47,21 @@ export const deleteMovie = (id) => async (dispatch) => {
 export const updateMovie = (id, post) => async (dispatch) => {
     try {
         const { data } = await api.updatePost(id, post);
+       
         dispatch({ type: UPDATE, payload: data });
 
     } catch (error) {
         console.log(error.message);
     }
 }
+
+
+// export const getTmdb = (q) => async (dispatch) => {
+//     try {
+//         const movieData = await api.tmdbFetch(q);
+//         //console.log(movieData.data);
+//         dispatch({ type: 'TMDB', payload: movieData.data });
+//     } catch (error) {
+//         console.log(error.message);
+//     }
+// }

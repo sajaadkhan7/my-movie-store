@@ -26,7 +26,11 @@ const Layout = () => {
                 </LinkContainer>
                
                 <LinkContainer to="/list" >
-                <ReactBootstrap.Nav.Link>Explore</ReactBootstrap.Nav.Link>
+                <ReactBootstrap.Nav.Link>Movies</ReactBootstrap.Nav.Link>
+                </LinkContainer>
+
+                <LinkContainer to="/listTS" >
+                <ReactBootstrap.Nav.Link>TvShows</ReactBootstrap.Nav.Link>
                 </LinkContainer>
                
                 <LinkContainer to="/create">
