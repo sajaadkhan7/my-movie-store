@@ -39,10 +39,22 @@ const MovieDetails = () => {
         const moviesD = await data2.json();
         
         setMovieDetails(moviesD);
+        console.log(movieDetails);
+
        
         
         
     };
+    function toHoursAndMinutes(totalMinutes) {
+        const minutes = totalMinutes % 60;
+        const hours = Math.floor(totalMinutes / 60);
+      
+        return `${padTo2Digits(hours)}:${padTo2Digits(minutes)}`;
+      }
+      
+      function padTo2Digits(num) {
+        return num.toString().padStart(2, '0');
+      }
 
 
     return (
@@ -50,11 +62,44 @@ const MovieDetails = () => {
             {movieDetails &&
             
             
-        <div className={`${styles.movieD} container-fluid d-flex`} style={{backgroundImage: `url('https://image.tmdb.org/t/p/original${movieDetails.poster_path}')`}}>
+        <div className={`${styles.movieD} container-fluid d-flex text-white`} style={{backgroundImage: `url('https://image.tmdb.org/t/p/original${movieDetails.poster_path}')`}}>
                     <div className={`${styles.flexItem}  `}><img src={'https://image.tmdb.org/t/p/original' + movieDetails.poster_path}></img></div>
                     <div className={`${styles.flexItem}`}>
-                        <h2>{ movieDetails.title}</h2>
+                        <h2>{movieDetails.title} ({movieDetails.release_date})</h2>
+                        <h5>{movieDetails.tagline }</h5>
+                        <h5>Genre: {movieDetails.genres.map(item => item.name + " ")} </h5>
+                        <h6>User Rating : &nbsp; 
+                                                    {
+                                                        [...Array(Math.round(movieDetails.vote_average/2))].map((ele, i) => (
+                                                            <b key={i} style={{ fontSize: "1rem", color: "#FDCC0D" }}>&#9733;</b>
+                                                        ))
+                                                    }
+                                                    {
+                                                        [...Array(5 - Math.round(movieDetails.vote_average/2))].map((ele, i) => (
+                                                            <b key={i} style={{ fontSize: "1rem" }}>&#9734;</b>
+                                                        ))
+                                                    }
+                        </h6>
+                        <br/><br/>
+                        <h4>Movie Overview: </h4>
+                        <h5>{movieDetails.overview}</h5>
+                        <br />
+                        <br />
+                        <div className='d-flex justify-content-between p-5'>
+                            <div>
+                                <h4>Duration</h4>
+                                <h5>{toHoursAndMinutes(movieDetails.runtime) }</h5>
+                            </div>
+                            <div><h4>Language</h4>
+                                <h5>{movieDetails.spoken_languages[0].name }</h5>
+                            </div>
+                            <div><h4>Release Status</h4>
+                                <h5>{ movieDetails.status}</h5>
+                            </div>
 
+                        
+                            
+                        </div>
                     </div>
             </div>
         }

@@ -40,6 +40,8 @@ const Layout = () => {
                 <LinkContainer to="/about">
                 <ReactBootstrap.Nav.Link>About</ReactBootstrap.Nav.Link>
                 </LinkContainer>
+
+                
   
               </ReactBootstrap.Nav>        
             </ReactBootstrap.Navbar.Collapse>
