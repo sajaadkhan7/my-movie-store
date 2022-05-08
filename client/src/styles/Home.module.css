@@ -16,7 +16,8 @@
 /* movie details page css */
 
 .flexItem img{
-  width: 100%;
+max-width: 70%;
+
 }
 .flexItem{
   width: 50%;

@@ -14,6 +14,7 @@ const MoviesCards2 = () => {
 
     // use state variable to filter data according to the search term
     const [filteredData, setMovie] = useState("");
+    
     //const [searchTerm, setsearchTerm] = useState("");
     const [searchTerm2, setsearchTerm2] = useState("");
 

@@ -11,6 +11,7 @@ import styles from '../../styles/Home.module.css';
 
 const MovieDetails = () => {
     const [movieDetails, setMovieDetails] = useState();
+    const [videoDetails, setVideosUrl] = useState();
     //get the current id of the element
     const { detailId } = useParams(); 
     
@@ -30,10 +31,11 @@ const MovieDetails = () => {
     // console.log(singleEle);  
     // https://api.themoviedb.org/3/movie/639933/videos?api_key=c1ec99bca4a799530c16fb945021413e&language=en-US
     const fetchTmdb = async () => { 
-        // const data = await fetch(`https://api.themoviedb.org/3/movie/${detailId}/videos?api_key=c1ec99bca4a799530c16fb945021413e&language=en-US&page=1`);
-        // const moviesV = await data.json();
+        const data = await fetch(`https://api.themoviedb.org/3/movie/${detailId}/videos?api_key=c1ec99bca4a799530c16fb945021413e&language=en-US&page=1`);
+        const moviesV = await data.json();
         
-        // setVideosUrl(movieDetails);
+        setVideosUrl(moviesV.results);
+        console.log(videoDetails);
         
         const data2 = await fetch(`https://api.themoviedb.org/3/movie/${detailId}?api_key=c1ec99bca4a799530c16fb945021413e&language=en-US&page=1`);
         const moviesD = await data2.json();
@@ -41,7 +43,9 @@ const MovieDetails = () => {
         setMovieDetails(moviesD);
         console.log(movieDetails);
 
+
        
+
         
         
     };
@@ -63,11 +67,12 @@ const MovieDetails = () => {
             
             
         <div className={`${styles.movieD} container-fluid d-flex text-white`} style={{backgroundImage: `url('https://image.tmdb.org/t/p/original${movieDetails.poster_path}')`}}>
-                    <div className={`${styles.flexItem}  `}><img src={'https://image.tmdb.org/t/p/original' + movieDetails.poster_path}></img></div>
+                    <div className={`${styles.flexItem} d-flex justify-content-center `}><img src={'https://image.tmdb.org/t/p/original' + movieDetails.poster_path}></img></div>
                     <div className={`${styles.flexItem}`}>
                         <h2>{movieDetails.title} ({movieDetails.release_date})</h2>
                         <h5>{movieDetails.tagline }</h5>
                         <h5>Genre: {movieDetails.genres.map(item => item.name + " ")} </h5>
+                        
                         <h6>User Rating : &nbsp; 
                                                     {
                                                         [...Array(Math.round(movieDetails.vote_average/2))].map((ele, i) => (
@@ -80,6 +85,7 @@ const MovieDetails = () => {
                                                         ))
                                                     }
                         </h6>
+                        <div><a href={`https://youtu.be/${videoDetails[0].key}`}>Play Trailer</a></div>
                         <br/><br/>
                         <h4>Movie Overview: </h4>
                         <h5>{movieDetails.overview}</h5>
