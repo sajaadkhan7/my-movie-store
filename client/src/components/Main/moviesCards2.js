@@ -2,6 +2,9 @@ import styles from '../../styles/Home.module.css';
 // import avatarImg from '../../images/img_avatar.png';
 //import { useSelector } from 'react-redux';
 import { useState } from 'react';
+import { Button } from 'react-bootstrap';
+import { FaThumbsUp } from 'react-icons/fa';
+import { MdFavorite } from 'react-icons/md';
 import * as RB from 'react-bootstrap';
 
 import Tmdb from './Tmdb';
@@ -51,32 +54,47 @@ const MoviesCards2 = () => {
                 {
                    
                     filteredData && filteredData.map(((movie, index) => {
-                        if (index < 15) {
+                        if (index < 21) {
                             return (
                                 <div className={`${styles.card} m-2`} key={index} style={{ position: "relative" }}>
                                     {/* <a href={`movies/${movie._id}`}> */}
-                                    {movie.poster_path &&
-                                        <img src={'https://image.tmdb.org/t/p/original' + movie.poster_path} alt="Avatar" style={{ width: "100%" }}></img>
-                                    }
-                                    <div className={styles.container} style={{ position: "relative" }}>
-                                        <div className={styles.mName_rating}>
-                                            {/* Rating stars */}
-                                            <h4 className='text-truncate ' >{movie.title}</h4><h4>
-                                                {
-                                                    [...Array(Math.round(movie.vote_average/2))].map((ele, i) => (
-                                                        <b key={i} style={{ fontSize: "1em", color: "#FDCC0D" }}>&#9733;</b>
-                                                    ))
-                                                }
-                                                {
-                                                    [...Array(5 - Math.round(movie.vote_average/2))].map((ele, i) => (
-                                                        <b key={i} style={{ fontSize: "1em" }}>&#9734;</b>
-                                                    ))
-                                                }
-                                            </h4>
+                                    <div style={{position:'relative'}}>
+                                      {/* as movie poster has just the relative path so we need to append the follwing url with it. */}
+                                        {/* <a href={`https://api.themoviedb.org/3/movie/${movie.id}?api_key=c1ec99bca4a799530c16fb945021413e&language=en-US&page=1`}> */}
+                                        <a href={`/movies/tmdb/${movie.id}`}>
+                                        <img src={'https://image.tmdb.org/t/p/original' + movie.poster_path} alt="Avatar" style={{ width: "100%" }}>  
+                                        </img>
+                                        </a>
+                                        <div style={{ display:'flex',justifyContent:'space-between',position: 'absolute', bottom: '0px', color: 'white', left: '0px', width: "100%", backgroundColor: 'rgba(0,0,0,0.8)' }}>
+                                            <Button   variant='hidden' size='lg' style={{color:'white' }}>
+                                                <FaThumbsUp />
+                                                <i style={{ paddingLeft:'0.2rem', fontSize:'0.8rem' }}> 2k </i>
+                                            </Button>
+                                            <Button   variant='hidden' size='lg' style={{color:'white' }}>
+                                                <MdFavorite />
+                                            </Button>
                                         </div>
-                                        <p>Director : {movie.original_language}</p>
-                                        <p>Release Date: {movie.release_Date}</p>
-                                    </div>
+                                       </div>
+                                     <div className={styles.container} style={{ position: "relative"}}>
+                                            <div className={styles.mName_rating}>
+                                                {/* Rating stars */}
+                                                <h4 className='text-truncate ' style={{fontSize:"1rem", paddingTop:'0.5rem'}} >{movie.title}</h4>
+                                                <h4>
+                                                    {
+                                                        [...Array(Math.round(movie.vote_average/2))].map((ele, i) => (
+                                                            <b key={i} style={{ fontSize: "1rem", color: "#FDCC0D" }}>&#9733;</b>
+                                                        ))
+                                                    }
+                                                    {
+                                                        [...Array(5 - Math.round(movie.vote_average/2))].map((ele, i) => (
+                                                            <b key={i} style={{ fontSize: "1rem" }}>&#9734;</b>
+                                                        ))
+                                                    }
+                                                </h4>
+                                            </div>
+                                            <p style={{fontSize:'0.7rem'}}>Release Date: {movie.release_date}</p>
+                                            <p style={{fontSize:'0.7rem'}} >Language:<b> {movie.original_language}</b></p>
+                                        </div>
                                 </div>
                             )
                         }
@@ -117,7 +135,8 @@ const MoviesCards2 = () => {
             <h2 className="container mt-3"> Upcoming Movies </h2>
             <Tmdb keywordQ="upcoming" category="movie"/>
             <h2 className="container mt-3"> Popular Movies </h2>
-            <Tmdb keywordQ="popular" category="movie"/>
+            <Tmdb keywordQ="popular" category="movie" />
+            
     </>
     )
 };

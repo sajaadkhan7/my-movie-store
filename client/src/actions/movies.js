@@ -55,6 +55,18 @@ export const updateMovie = (id, post) => async (dispatch) => {
     }
 }
 
+export const tmdbStore = (category,keywordQ) => async (dispatch) => {
+    try {
+        const data = await fetch(`https://api.themoviedb.org/3/${category}/${keywordQ}?api_key=c1ec99bca4a799530c16fb945021413e&language=en-US&page=1`);
+        const movies = await data.json();
+        //console.log(movies.results);
+        dispatch({ type: 'TMDB_STORE', payload: movies.results });
+    }
+    catch(error) {
+        console.log(error.message);
+    }
+}
+
 
 // export const getTmdb = (q) => async (dispatch) => {
 //     try {

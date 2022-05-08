@@ -15,6 +15,7 @@ const Details = () => {
 
     const { id } = useParams(); 
     const movies = useSelector(state => state.movies); 
+    console.log(movies);
     const singleEle = movies.find(element => element._id === id);
 
     const [postData, setPostData] = useState({

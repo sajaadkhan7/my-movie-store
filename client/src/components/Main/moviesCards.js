@@ -9,11 +9,11 @@ import Tmdb from './Tmdb';
 const MoviesCategory = () => {
   const movies = useSelector(state => state.movies);
   const [filteredData, setMovie] = useState();
-  const [searchTerm, setsearchTerm] = useState("");
+  //const [searchTerm, setsearchTerm] = useState("");
   
   useEffect(() => {
       setMovie(movies);
-  }, [movies, searchTerm]);
+  }, [movies]);
 
   return (
     <div className='container'>
