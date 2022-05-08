@@ -85,7 +85,8 @@ const MovieDetails = () => {
                                                         ))
                                                     }
                         </h6>
-                        <div><a href={`https://youtu.be/${videoDetails[0].key}`}>Play Trailer</a></div>
+
+                        <div> <a href={`https://youtu.be/${videoDetails[0].key}`} target="_blank">Play Trailer</a></div>
                         <br/><br/>
                         <h4>Movie Overview: </h4>
                         <h5>{movieDetails.overview}</h5>
