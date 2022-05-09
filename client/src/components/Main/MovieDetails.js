@@ -6,7 +6,7 @@ import { useParams } from "react-router-dom";
 import { useState } from 'react';
 //import * as ReactBS from 'react-bootstrap';
 import styles from '../../styles/Home.module.css';
-
+import { BsPlayCircle } from 'react-icons/bs';
 
 
 const MovieDetails = () => {
@@ -66,8 +66,8 @@ const MovieDetails = () => {
             {movieDetails &&
             
             
-        <div className={`${styles.movieD} container-fluid d-flex text-white`} style={{backgroundImage: `url('https://image.tmdb.org/t/p/original${movieDetails.poster_path}')`}}>
-                    <div className={`${styles.flexItem} d-flex justify-content-center `}><img src={'https://image.tmdb.org/t/p/original' + movieDetails.poster_path}></img></div>
+        <div className={`${styles.movieD} container-fluid d-md-flex text-white`} style={{backgroundImage: `url('https://image.tmdb.org/t/p/original${movieDetails.poster_path}')`}}>
+                    <div className={`${styles.flexItem} d-flex justify-content-center  `}><img src={'https://image.tmdb.org/t/p/original' + movieDetails.poster_path}></img></div>
                     <div className={`${styles.flexItem}`}>
                         <h2>{movieDetails.title} ({movieDetails.release_date})</h2>
                         <h5>{movieDetails.tagline }</h5>
@@ -86,7 +86,7 @@ const MovieDetails = () => {
                                                     }
                         </h6>
 
-                        <div> <a href={`https://youtu.be/${videoDetails[0].key}`} target="_blank">Play Trailer</a></div>
+                        <div> <a className='text-decoration-none' href={`https://youtu.be/${videoDetails[0].key}`} target="_blank"><b className='h1'><BsPlayCircle/></b><i className='h4'> Play Trailer</i></a></div>
                         <br/><br/>
                         <h4>Movie Overview: </h4>
                         <h5>{movieDetails.overview}</h5>

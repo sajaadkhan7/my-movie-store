@@ -16,11 +16,12 @@
 /* movie details page css */
 
 .flexItem img{
-max-width: 70%;
+max-width: 100%;
+box-shadow:black 10px 10px 10px;
 
 }
 .flexItem{
-  width: 50%;
+  width: 100%;
   padding: 1rem;
 }
 .flexItem:nth-child(2){
@@ -34,11 +35,21 @@ max-width: 70%;
     .card{
       max-width: 200px;
     }
+    .flexItem img{
+      max-width: 70%;
+      box-shadow:black 10px 10px 10px;
+      
+      }
+      .flexItem{
+        width: 50%;
+        padding: 1rem;
+      }
   }
   @media only screen and (min-width:1080px) {
     .card{
       max-width: 300px;
     }
+    
   }
 
   .scr::-webkit-scrollbar {display:none;}
