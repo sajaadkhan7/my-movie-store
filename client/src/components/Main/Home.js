@@ -9,15 +9,19 @@ import B3 from '../../images/Banner_images_2.png';
 
 import {  Carousel } from "react-bootstrap";
 import MoviesCards from "./moviesCards";
+import ReactLoading from 'react-loading';
+//import Loading from "./Loading";
+import { useSelector } from "react-redux";
 
 
 const Home = () => {
+    const LoadingState = useSelector(state => state.LoadingState);
         const [index, setIndex] = useState(0);
       
         const handleSelect = (selectedIndex, e) => {
           setIndex(selectedIndex);
     };
-  
+
 
     
     
@@ -62,10 +66,8 @@ const Home = () => {
                     </Carousel.Caption>
                 </Carousel.Item>
             </Carousel>
-           
-            <MoviesCards />
-  
-           
+
+           <MoviesCards/>
         </>
     );
     

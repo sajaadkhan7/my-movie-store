@@ -6,6 +6,7 @@ import { useEffect, useState } from 'react';
 import Tmdb from './Tmdb';
 
 
+
 const MoviesCategory = () => {
   const movies = useSelector(state => state.movies);
   const [filteredData, setMovie] = useState();
@@ -73,13 +74,18 @@ const MoviesCategory = () => {
 export { MoviesCategory };
 
 const MoviesCards = () => {
+ 
     return (
         <>
+      
+                    
              <h2 className="container mt-3"> Featured Movies </h2>
             <Tmdb keywordQ="upcoming" category="movie"/>
              <h2 className="container mt-3"> Latest Movies </h2>
-            <Tmdb keywordQ="now_playing" category="movie"/>
-             <MoviesCategory />
+            <Tmdb keywordQ="now_playing" category="movie" />
+            <MoviesCategory />
+           
+        
           
         </>  
     );

@@ -11,8 +11,9 @@ export default (movies = [], action) => {
             return [movies];
         case DELETE_SINGLE:
             return [movies];
+        
         case UPDATE:
-            return movies.map((movie)=>movie._id === action.payload._id ? action.payload : movie)
+            return movies.map((movie) => movie._id === action.payload._id ? action.payload : movie);
         default:
             return movies;
     }

@@ -29,8 +29,8 @@ const Layout = () => {
                 <ReactBootstrap.Nav.Link>Movies</ReactBootstrap.Nav.Link>
                 </LinkContainer>
 
-                <LinkContainer to="/listTS" >
-                <ReactBootstrap.Nav.Link>TvShows</ReactBootstrap.Nav.Link>
+                <LinkContainer to="/tvshows" >
+                <ReactBootstrap.Nav.Link>Tv Shows</ReactBootstrap.Nav.Link>
                 </LinkContainer>
                
                 <LinkContainer to="/create">
