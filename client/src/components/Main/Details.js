@@ -1,21 +1,25 @@
-
-import * as ReactBS from 'react-bootstrap';
-import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
-
-import { deleteMovie, updateMovie } from '../../actions/movies';
 import { useState } from 'react';
+//import react bootstrap
+import * as ReactBS from 'react-bootstrap';
+//import use dispatch from redux
+import { useDispatch, useSelector } from "react-redux";
+// use param for fetching params from url
+import { useParams } from "react-router-dom";
+// import actions from redux actions defined
+import { deleteMovie, updateMovie } from '../../actions/movies';
 
 
 const Details = () => {
-   // const [element, setEle] = useState({});
-    //get the current id of the element
     const [showHide, setShowhide] = useState(false);
     const dispatch = useDispatch();
-
+    
+    //get the current id of the element
     const { id } = useParams(); 
+    //accesssing global state variable 
     const movies = useSelector(state => state.movies); 
+    // printing on console
     console.log(movies);
+    // finding element that has been clicked for details
     const singleEle = movies.find(element => element._id === id);
 
     const [postData, setPostData] = useState({
@@ -30,18 +34,16 @@ const Details = () => {
         }
     });
 
-   
+   //handling submit button 
     const handleSubmitUp = (e) => {
         e.preventDefault();
         alert('Movie has been updated.');
         console.log(postData);
         dispatch(updateMovie(singleEle._id, postData));
-        setShowhide(false);
-        
+        setShowhide(false);  
     }
-
+  //handling delete button
     const onDelete = () => {
-
         if (true) {
             dispatch(deleteMovie(id));
             alert('deleted');
@@ -49,7 +51,7 @@ const Details = () => {
         }
         else return;
     }
-
+ // handling edit button
     const OnEdit = () => {  
         setShowhide(true);
         setPostData({
@@ -73,6 +75,7 @@ const Details = () => {
     return (
         <>
             { 
+                //conditional rendering
              singleEle &&
             <div>
             <h1 className="text-center">{singleEle.name}</h1>
@@ -117,7 +120,7 @@ const Details = () => {
                 </div>
                 
             }
-            
+              // conditional rendering for updating data
                 {showHide &&  <div>
                      <h2 className="m-auto text-center p-4 m-3"> Update New Movie</h2>
                      <ReactBS.Form className="w-75 m-auto" onSubmit={handleSubmitUp}>

@@ -1,35 +1,34 @@
+//import required react components
 import React from "react";
 import { useState } from "react";
-//import * as ReactBS from 'react-bootstrap';
+//import style from css file
 import styles from '../../styles/Home.module.css';
-
+// import banner images
 import B1 from '../../images/Banner_images.jpeg';
 import B2 from '../../images/Banner_images_1.png';
 import B3 from '../../images/Banner_images_2.png';
-
-import {  Carousel } from "react-bootstrap";
+// import carousel component from react bootstrap
+import { Carousel } from "react-bootstrap";
+//import user defined component
 import MoviesCards from "./moviesCards";
+//import loading component from react-loading
 import ReactLoading from 'react-loading';
-//import Loading from "./Loading";
+// import useSelector to access global state managed by react redux
 import { useSelector } from "react-redux";
 
 
 const Home = () => {
+    // loading state from global store
     const LoadingState = useSelector(state => state.LoadingState);
         const [index, setIndex] = useState(0);
-      
+       // for index focus
         const handleSelect = (selectedIndex, e) => {
           setIndex(selectedIndex);
     };
 
-
-    
-    
     return (
 
         <>
-
-            
             <Carousel activeIndex={index} onSelect={handleSelect}>
                 <Carousel.Item>
                     <img
@@ -66,7 +65,7 @@ const Home = () => {
                     </Carousel.Caption>
                 </Carousel.Item>
             </Carousel>
-
+            // component render
            <MoviesCards/>
         </>
     );

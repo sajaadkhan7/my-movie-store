@@ -1,25 +1,25 @@
+//import styles from css file
 import styles from '../../styles/Home.module.css';
-// import avatarImg from '../../images/img_avatar.png';
-//import { useSelector } from 'react-redux';
+
 import { useState } from 'react';
+//importing button component of react bootstrap
 import { Button } from 'react-bootstrap';
+//import react icons
 import { FaThumbsUp } from 'react-icons/fa';
 import { MdFavorite } from 'react-icons/md';
+//import react bootstrap compnents
 import * as RB from 'react-bootstrap';
-
+//import user defined compnent
 import Tmdb from './Tmdb';
 
 const MoviesCards2 = () => {
-   // const movies = useSelector(state => state.movies);
-
     // use state variable to filter data according to the search term
     const [filteredData, setMovie] = useState("");
-    
     //const [searchTerm, setsearchTerm] = useState("");
     const [searchTerm2, setsearchTerm2] = useState("");
 
     
-
+// usefull code to filter search movies in the global or local state
     // useEffect(() => {
     //     setMovie(movies);
     // }, [movies, searchTerm]);
@@ -38,34 +38,37 @@ const MoviesCards2 = () => {
     //      ));  
     // }
 
+    // handling the search button to filter data 
     const handleSubmit2 = (e) => {
         e.preventDefault();
         fetchData();
     }
+    //asynchoronous function to fetch data from an api endpoint and then storing data to a state variable
     const fetchData = async () => {
         const data = await fetch(`https://api.themoviedb.org/3/search/movie?api_key=c1ec99bca4a799530c16fb945021413e&language=en-US&query=${searchTerm2}&page=1&include_adult=false`);
         const movies= await data.json();
         setMovie(movies.results);
     }
+    // component for search
     const Search = () => {
         return (
             <>
             <h2 className="container mt-3"> Search Results </h2>
             <div className={`${styles.scr} d-flex flex-row flex-nowrap overflow-auto`} >
                 {
-                   
+                   //conditional render 
                     filteredData && filteredData.map(((movie, index) => {
+                        //only show 20 movies in a row
                         if (index < 21) {
                             return (
                                 <div className={`${styles.card} m-2`} key={index} style={{ position: "relative" }}>
-                                    {/* <a href={`movies/${movie._id}`}> */}
                                     <div style={{position:'relative'}}>
                                       {/* as movie poster has just the relative path so we need to append the follwing url with it. */}
-                                        {/* <a href={`https://api.themoviedb.org/3/movie/${movie.id}?api_key=c1ec99bca4a799530c16fb945021413e&language=en-US&page=1`}> */}
-                                        <a href={`/movies/tmdb/${movie.id}`}>
+                                       <a href={`/movies/tmdb/${movie.id}`}>
                                         <img src={'https://image.tmdb.org/t/p/original' + movie.poster_path} alt="Avatar" style={{ width: "100%" }}>  
                                         </img>
                                         </a>
+                                        // like and favorite buttons on a movie card 
                                         <div style={{ display:'flex',justifyContent:'space-between',position: 'absolute', bottom: '0px', color: 'white', left: '0px', width: "100%", backgroundColor: 'rgba(0,0,0,0.8)' }}>
                                             <Button   variant='hidden' size='lg' style={{color:'white' }}>
                                                 <FaThumbsUp />
@@ -108,7 +111,7 @@ const MoviesCards2 = () => {
     
     return (
         <>
-            
+           {/* code for the serach field 1 for filtering data from usestate state variable. */}
               {/* <RB.Form  onSubmit={handleSubmit}>
                 <RB.Form.Group className="mb-3 w-50 m-auto d-flex" controlId="formbasicsearch">
                     <RB.Form.Control className="me-2 form-control-lg " type="text"

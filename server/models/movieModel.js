@@ -1,45 +1,44 @@
 import mongoose from "mongoose";
 
 
-const actorSchema = new mongoose.Schema({
-    actor_name:{
-        type:String,
-        required:false
-        
-    },
-    age:{
-        type:Number,
-        required:false,
-        min:5
-    },
-    status:{
-        type:String,
-        required:false
-    }
-});
+
 
 const movieSchema = mongoose.Schema({
-    name:{
-        type:String,
-        required:true,
-        minlength:3
-    },
-    director:{
-        type:String,
-        required:true,
-        minlength:3
-    },
-    actor:actorSchema, //adding sub schema
-    rating:{
+    id:{
         type:Number,
-        required:false,
-        'default':0,
-        min:0,
-        max:5
-    },
-    release_Date:{
-        type:String,
         required:true
+    },
+    original_language:{
+        type:String,
+        required:true,
+        minlength:2
+    },
+    poster_path:{
+        type: String,
+        required: true
+    },
+    release_date:{
+        type:Date,
+        required:true
+    },
+    title: {
+        type: String,
+        required: true,
+        minlength:2
+    },
+    vote_average: {
+        type: Number,
+        required: false,
+        min: 0,
+        max:10
+    },
+    likes: {
+        type: Number,
+        required:false
+    },
+    fav: {
+        type: Boolean,
+        required:false
     }
 });
 

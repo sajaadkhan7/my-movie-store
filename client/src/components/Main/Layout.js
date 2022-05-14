@@ -1,8 +1,14 @@
+//import required react components
 import React from 'react';
+// import react bootstrap 
 import * as ReactBootstrap from 'react-bootstrap';
+//import outlet from react router dom .. it is a component which links would target to render
 import { Outlet } from 'react-router-dom';
-import Footer from './Footer';
+// link container if we are using react with bootstap
 import { LinkContainer } from 'react-router-bootstrap';
+//footer component
+import Footer from './Footer';
+//logo for the website
 import logo from '../../images/movieStore_Logo.png';
 
 const Layout = () => {
@@ -20,7 +26,7 @@ const Layout = () => {
                 style={{ maxHeight: 'auto' }}
                 navbarScroll>
                 
-                
+    
                 <LinkContainer to="/">
                 <ReactBootstrap.Nav.Link>Home</ReactBootstrap.Nav.Link>
                 </LinkContainer>

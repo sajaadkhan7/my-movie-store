@@ -1,3 +1,4 @@
+//action type constants 
 export const FETCH_ALL = 'FETCH_ALL';
 export const GET_SINGLE = 'GET_SINGLE';
 export const CREATE = 'CREATE';

@@ -1,6 +1,7 @@
 import { FETCH_ALL, GET_SINGLE, CREATE, DELETE_SINGLE, UPDATE } from '../constants/actionTypes';
-//WE HAVE CREATED CONTANTS IN A DIFFERENT FILE TO REPLACE THE STRING ACTION TYPES    
+//WE HAVE CREATED CONTANTS IN A DIFFERENT FILE TO REPLACE THE STRING ACTION TYPES
 
+//reducer for movies storage
 export default (movies = [], action) => {
     switch (action.type) {
         case FETCH_ALL:

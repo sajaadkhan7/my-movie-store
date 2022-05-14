@@ -1,3 +1,4 @@
+// reducer for tmdb store
 export default (Tmdb_store = [], action) => {
     switch (action.type) {
         case 'TMDB_STORE':

@@ -1,52 +1,87 @@
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';  
+
+// import styles
 import styles from '../../styles/Home.module.css';
+
+//import  component from react bootstrap
 import { Button } from 'react-bootstrap';
+
+//import icons from react icons dependency
 import { FaThumbsUp } from 'react-icons/fa';
 import { MdFavorite } from 'react-icons/md';
+
+// import redux functionalities
 import { useDispatch, useSelector } from 'react-redux';
-//import { tmdbStore } from '../../actions/movies';
+
+//import redux actions for loadind state
 import { done, notdone } from '../../actions/movies';
+
+//import react loading component from react loading dependency
 import ReactLoading from 'react-loading';
+
+//import axios to fetch data from an api endpoint
+import axios from 'axios';
+
+
 const Tmdb = (props) => {
     const dispatch = useDispatch();
-    const LoadingState = useSelector(stat => stat.LoadingState);
-   
-   // const abc = useSelector(state => state.Tmdb_store);
+    // accessing loading state from global store
+    const LoadingState = useSelector(stat => stat.LoadingState);   
+    // functional level state storage
     const [moviess, setmoviess] = useState();
+
+    //use effect to do things after render . it is also known for side effects
+    // run fetchTmdb function after first render.
     useEffect(() => {
         fetchTmdb();
-        // dispatch(tmdbStore(props.category,props.keywordQ));
-        
     }, []);    
-//fetching movie data from The Movie Database api using an async function and then updating the state.
-    const fetchTmdb = async () => { 
-        dispatch(notdone());
-        const data = await fetch(`https://api.themoviedb.org/3/${props.category}/${props.keywordQ}?api_key=c1ec99bca4a799530c16fb945021413e&language=en-US&page=1`);
-        const movies= await data.json();
-        setmoviess(movies.results);
-        dispatch(done());
-      
-    };
-    // const fetchTvShows = async () => {
-    //     const tv = await fetch('https://api.themoviedb.org/3/search/tv?api_key=c1ec99bca4a799530c16fb945021413e&language=en-US&page=1&query=popular&include_adult=false'); 
-    //     const tvshowsJson = await tv.json();
-    //     setmoviess(tvshowsJson.results);
-    // };
 
+    //fetching movie data from The Movie Database api using an async function and then updating the state.
+    const fetchTmdb = async () => { 
+        dispatch(notdone());    //dispatching an action
+        const data = await fetch(`https://api.themoviedb.org/3/${props.category}/${props.keywordQ}?api_key=c1ec99bca4a799530c16fb945021413e&language=en-US&page=1`);
+        const movies= await data.json();  
+        setmoviess(movies.results);  //storing api responded data to functional level state
+        dispatch(done());  //dispatching an action
+    };
+    
+    // handling add to favourite button.. it will store all data specific to the current movie under the click.
+    // and then will make a axios post request add that movie in favourites. which is managed on mongoDB.
+    const addToFav = (event, movie) => {
+        // server url to send post request to.
+        let url = 'https://movi-store.herokuapp.com/movies';
+        // storing current movie in a variable.
+        let moviTemp = {
+            id: movie.id,
+            original_language: movie.original_language,
+            poster_path: movie.poster_path,
+            release_date: movie.release_date,
+            title: movie.title,
+            vote_average: movie.vote_average,
+            likes: 12,
+            fav:true
+        };
+        // making axios post request.
+        axios.post(url, moviTemp);  
+    };
+    
+    
     return (
         <>
             {
+            //  if loeadingState variable is true then render movies otherwise show loading animation. 
                 LoadingState ? <div className={`${styles.scr} d-flex flex-row flex-nowrap overflow-auto`} >
-                    {
+                {   
+                    //conditional rendering using && operator 
+                    // will only render of moviess has some data in it..
                         moviess && moviess.map(((movie, index) => {
                             if (index < 21) {
                                 return (
                                     <div className={`${styles.card} m-2`} key={index} style={{ position: "relative" }}>
-                                        {/* <a href={`movies/${movie._id}`}> */}
+                                       
                                         <div style={{ position: 'relative' }}>
                                             {/* as movie poster has just the relative path so we need to append the follwing url with it. */}
-                                            {/* <a href={`https://api.themoviedb.org/3/movie/${movie.id}?api_key=c1ec99bca4a799530c16fb945021413e&language=en-US&page=1`}> */}
                                             <a href={`/movies/tmdb/${movie.id}`}>
                                                 <img src={'https://image.tmdb.org/t/p/original' + movie.poster_path} alt="Avatar" style={{ width: "100%" }}>
                                                 </img>
@@ -56,7 +91,7 @@ const Tmdb = (props) => {
                                                     <FaThumbsUp />
                                                     <i style={{ paddingLeft: '0.2rem', fontSize: '0.8rem' }}> 2k </i>
                                                 </Button>
-                                                <Button variant='hidden' size='lg' style={{ color: 'white' }}>
+                                                <Button onClick={(e)=>{addToFav(e,movie)}} variant='hidden' size='lg' style={{ color: 'white' }}>
                                                     <MdFavorite />
                                                 </Button>
                                             </div>
@@ -91,7 +126,7 @@ const Tmdb = (props) => {
             <div className="container d-flex justify-content-center" >
                 <ReactLoading  type='bars' color='black' height={200} width={200} />
             </div> 
-                    
+                // above code will only render if loadingState variable is false.    
             }
         </>      
     )
