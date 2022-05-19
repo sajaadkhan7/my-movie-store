@@ -64,10 +64,10 @@ export const updateMovie = async (req, res) => {
    
 
         const { id: _id } = req.params;
-        const post = req.body;
-        if (!mongoose.Types.ObjectId.isValid(_id)) return res.status(404).send('No post  with that id');
-
-        const updatedMovie = await Movies.findByIdAndUpdate(_id, post, { new: true });
+    const post = req.body;
+    const movie = await Movies.find({ id: _id });
+        if (!mongoose.Types.ObjectId.isValid(movie[0]._id)) return res.status(404).send('No post  with that id');
+        const updatedMovie = await Movies.findByIdAndUpdate(movie[0]._id, post, { new: true });
         res.json(updatedMovie);
    
 }
