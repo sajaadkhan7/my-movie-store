@@ -76,7 +76,13 @@ export const done = () => {
     return {
       type: "NOT_DONE",
     };
-  };
+};
+export const Liked = () => {
+    return {
+        type:"LIKED",
+    };
+};
+
 // export const getTmdb = (q) => async (dispatch) => {
 //     try {
 //         const movieData = await api.tmdbFetch(q);

@@ -19,9 +19,9 @@ const MoviesCategory = () => {
        <h2 className="container mt-3"> Favourites </h2>
  <div className={`${styles.scr} d-flex flex-row flex-nowrap overflow-auto`} >
               {
-                  //conditional rendering
+                //   conditional rendering
                     filteredData && filteredData.map(((movie, index) => {
-                        if (index < 30) {
+                        if (index < 50) {
                             return (
                                 <div className={`${styles.card} m-2`} key={index} style={{ position: "relative" }}>
                                     <a href={`movies/${movie._id}`}>

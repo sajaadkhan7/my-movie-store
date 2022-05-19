@@ -23,8 +23,12 @@ import ReactLoading from 'react-loading';
 //import axios to fetch data from an api endpoint
 import axios from 'axios';
 
+import {updateMovie} from '../../actions/movies.js';
+
 
 const Tmdb = (props) => {
+    const storeMovies = useSelector(state => state.movies);
+    console.log(storeMovies);
     const dispatch = useDispatch();
     // accessing loading state from global store
     const LoadingState = useSelector(stat => stat.LoadingState);   
@@ -65,6 +69,39 @@ const Tmdb = (props) => {
         // making axios post request.
         axios.post(url, moviTemp);  
     };
+
+    const Like = (e, mov) => {
+        var upd;
+        storeMovies.map(ele => {
+            upd = false;
+            console.log(mov);
+            console.log(ele);
+            
+            if (ele.id == mov.id) {
+                //update action dispatch
+                const moviTemp = {
+                    id: mov.id,
+                    original_language: mov.original_language,
+                    poster_path: mov.poster_path,
+                    release_date: mov.release_date,
+                    title: mov.title,
+                    vote_average: mov.vote_average,
+                    likes:ele.likes+1,
+                    fav:true
+                };
+
+                dispatch(updateMovie(mov.id, moviTemp));
+                upd = true;
+            }
+            
+        });
+        if (upd === false) {
+            addToFav(e,mov);
+        }
+
+
+        //dispatch(Liked(movie.id));
+    };
     
     
     return (
@@ -87,7 +124,7 @@ const Tmdb = (props) => {
                                                 </img>
                                             </a>
                                             <div style={{ display: 'flex', justifyContent: 'space-between', position: 'absolute', bottom: '0px', color: 'white', left: '0px', width: "100%", backgroundColor: 'rgba(0,0,0,0.8)' }}>
-                                                <Button variant='hidden' size='lg' style={{ color: 'white' }}>
+                                                <Button onClick={(e)=>{Like(e,movie)}} variant='hidden' size='lg' style={{ color: 'white' }}>
                                                     <FaThumbsUp />
                                                     <i style={{ paddingLeft: '0.2rem', fontSize: '0.8rem' }}> 2k </i>
                                                 </Button>
