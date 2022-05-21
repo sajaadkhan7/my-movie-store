@@ -33,7 +33,7 @@ const MoviesCategory = () => {
                             return (
                                 <div className={`${styles.card} m-2`} key={index} style={{ position: "relative" }}>
                                     <div style={{ position: 'relative' }}>
-                                    <a href={`movies/${movie._id}`}>
+                                    <a href={`/movies/tmdb/${movie.id}`}>
                                         <img src={'https://image.tmdb.org/t/p/original' + movie.poster_path} alt="Avatar" style={{ width: "100%" }}></img>
                                     </a>
                                     <div style={{ display: 'flex', justifyContent: 'space-between', position: 'absolute', bottom: '0px', color: 'white', left: '0px', width: "100%", backgroundColor: 'rgba(0,0,0,0.8)' }}>
