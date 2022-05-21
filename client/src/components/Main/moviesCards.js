@@ -6,6 +6,13 @@ import { useEffect, useState } from 'react';
 //importing user defined component..
 import Tmdb from './Tmdb';
 
+//import  component from react bootstrap
+import { Button } from 'react-bootstrap';
+
+//import icons from react icons dependency
+import { FaThumbsUp } from 'react-icons/fa';
+import { MdFavorite } from 'react-icons/md';
+
 const MoviesCategory = () => {
   const movies = useSelector(state => state.movies);
   const [filteredData, setMovie] = useState();
@@ -25,9 +32,21 @@ const MoviesCategory = () => {
                         if (index < 50) {
                             return (
                                 <div className={`${styles.card} m-2`} key={index} style={{ position: "relative" }}>
+                                    <div style={{ position: 'relative' }}>
                                     <a href={`movies/${movie._id}`}>
                                         <img src={'https://image.tmdb.org/t/p/original' + movie.poster_path} alt="Avatar" style={{ width: "100%" }}></img>
                                     </a>
+                                    <div style={{ display: 'flex', justifyContent: 'space-between', position: 'absolute', bottom: '0px', color: 'white', left: '0px', width: "100%", backgroundColor: 'rgba(0,0,0,0.8)' }}>
+                                                <Button  variant='hidden' size='lg' style={{ color: 'white' }}>
+                                                    <FaThumbsUp />
+                                                    <i style={{ paddingLeft: '0.2rem', fontSize: '0.8rem' }}> {movie.likes} </i>
+                                                </Button>
+                                                {/* <Button onClick={(e)=>{addToFav(e,movie)}} variant='hidden' size='lg' style={{ color: 'white' }}>
+                                                    <MdFavorite />
+                                                </Button> */}
+                                            </div>
+                                        </div>
+
                                     <div className={styles.container} style={{ position: "relative" }}>
                                         <div className={styles.mName_rating}>
                                             {/* Rating stars */}

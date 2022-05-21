@@ -23,6 +23,7 @@ import ReactLoading from 'react-loading';
 import axios from 'axios';
 
 import {updateMovie} from '../../actions/movies.js';
+import { Ellipsis } from 'react-bootstrap/esm/PageItem';
 
 
 const Tmdb = (props) => {
@@ -63,7 +64,7 @@ const Tmdb = (props) => {
               release_date: movie.release_date,
               title: movie.title,
               vote_average: movie.vote_average,
-              likes: 12,
+              likes: 1,
               fav:true
         };
         
@@ -82,32 +83,55 @@ const Tmdb = (props) => {
     };
     const Like = (e, mov) => {
         console.log("at current "+mov.id);
-        var upd;
-        storeMovies.some(ele => {
-            console.log("in Store "+ele.id);
-            upd = false;
-            if (ele.id == mov.id) {
-                console.log('already in the favs ..like');
-                //update action dispatch
-                const moviTemp = {
-                    id: mov.id,
-                    original_language: mov.original_language,
-                    poster_path: mov.poster_path,
-                    release_date: mov.release_date,
-                    title: mov.title,
-                    vote_average: mov.vote_average,
-                    likes:ele.likes+1,
-                    fav:true
-                };
-                dispatch(updateMovie(mov.id, moviTemp));
-                upd = true;
-                
-            }  
-        });
-        if (upd === false) {
-            addToFav(e,mov);
+        
+        const update = (mov) => {
+            const moviTemp = {
+                id: mov.id,
+                original_language: mov.original_language,
+                poster_path: mov.poster_path,
+                release_date: mov.release_date,
+                title: mov.title,
+                vote_average: mov.vote_average,
+                likes:ele.likes+1,
+                fav:true
+            };
+            dispatch(updateMovie(mov.id, moviTemp));
         }
-        //dispatch(Liked(movie.id));
+
+        const ele = storeMovies.find((e, i) => {
+            if (e.id == mov.id) {
+                return mov.id;
+            } 
+        });
+        if (ele !== undefined) {
+          
+            update(ele);
+
+            
+        }
+        else {
+            console.log(ele);
+            addToFav(e, mov);
+        }
+    };
+
+    // function to print likes if the movie is stored in the mongodb with likes added to the dataset
+    const printLikes = (movie) => {
+      
+        // console.log(movie.id);
+        let liked = storeMovies.find((ele) => {
+            if (ele.id === movie.id) {
+               
+                return ele;
+           } 
+        });
+      
+        if (liked !== undefined) {
+            return liked.likes;
+        }
+        else {
+            return "0";
+        }
     };
     
     return (
@@ -135,7 +159,7 @@ const Tmdb = (props) => {
                                             <div style={{ display: 'flex', justifyContent: 'space-between', position: 'absolute', bottom: '0px', color: 'white', left: '0px', width: "100%", backgroundColor: 'rgba(0,0,0,0.8)' }}>
                                                 <Button onClick={(e)=>{Like(e,movie)}} variant='hidden' size='lg' style={{ color: 'white' }}>
                                                     <FaThumbsUp />
-                                                    <i style={{ paddingLeft: '0.2rem', fontSize: '0.8rem' }}> {movie.likes} </i>
+                                                    <i style={{ paddingLeft: '0.2rem', fontSize: '0.8rem' }}> {printLikes(movie)} </i>
                                                 </Button>
                                                 <Button onClick={(e)=>{addToFav(e,movie)}} variant='hidden' size='lg' style={{ color: 'white' }}>
                                                     <MdFavorite />
