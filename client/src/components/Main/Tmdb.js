@@ -143,7 +143,7 @@ const Tmdb = (props) => {
                     //conditional rendering using && operator 
                     // will only render of moviess has some data in it..
                         moviess && moviess.map(((movie, index) => {
-                            
+                            console.log(movie);
                             if (movie.release_date) { var dateV = new Date(movie.release_date); }
                             else { var dateV = new Date(movie.first_air_date); }
                             if (movie.title) { var title = movie.title; }

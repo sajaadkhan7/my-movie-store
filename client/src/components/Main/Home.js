@@ -38,7 +38,7 @@ const Home = () => {
                     />
                     <Carousel.Caption>
                         <h3>Doctor Strange in the Multiverse of madness</h3>
-                        <a href="/movies/6262a2fbb04e07c484152922" className="btn btn-light" >View Details</a>
+                        <a href={`/movies/tmdb/453395}`} className="btn btn-light" >View Details</a>
                     </Carousel.Caption>
                 </Carousel.Item>
                 <Carousel.Item>
@@ -50,7 +50,7 @@ const Home = () => {
 
                     <Carousel.Caption>
                         <h3>Sonic 2 The Hedgehog</h3>
-                        <a href="/movies/6262a6cdb04e07c484152939" className="btn btn-light" >View Details</a>
+                        <a href={`/movies/tmdb/675353}`} className="btn btn-light" >View Details</a>
                     </Carousel.Caption>
                 </Carousel.Item>
                 <Carousel.Item>
@@ -61,7 +61,7 @@ const Home = () => {
                     />
                     <Carousel.Caption>
                         <h3>Fantastic Beasts The Secrets of Dumbledore</h3>
-                        <a href="/movies/6262a748b04e07c484152947" className="btn btn-light" >View Details</a>
+                        <a href={`/movies/tmdb/338953}`} className="btn btn-light" >View Details</a>
                     </Carousel.Caption>
                 </Carousel.Item>
             </Carousel>
