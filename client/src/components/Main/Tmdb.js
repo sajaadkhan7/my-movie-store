@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from 'react';  
 
 // import styles
@@ -28,7 +27,7 @@ import {updateMovie} from '../../actions/movies.js';
 
 const Tmdb = (props) => {
     const storeMovies = useSelector(state => state.movies);
-    console.log(storeMovies);
+   
     const dispatch = useDispatch();
     // accessing loading state from global store
     const LoadingState = useSelector(stat => stat.LoadingState);   
@@ -39,7 +38,7 @@ const Tmdb = (props) => {
     // run fetchTmdb function after first render.
     useEffect(() => {
         fetchTmdb();
-    }, []);    
+    }, [storeMovies]);    
 
     //fetching movie data from The Movie Database api using an async function and then updating the state.
     const fetchTmdb = async () => { 
@@ -53,31 +52,42 @@ const Tmdb = (props) => {
     // handling add to favourite button.. it will store all data specific to the current movie under the click.
     // and then will make a axios post request add that movie in favourites. which is managed on mongoDB.
     const addToFav = (event, movie) => {
-        // server url to send post request to.
-        let url = 'https://movi-store.herokuapp.com/movies';
-        // storing current movie in a variable.
-        let moviTemp = {
-            id: movie.id,
-            original_language: movie.original_language,
-            poster_path: movie.poster_path,
-            release_date: movie.release_date,
-            title: movie.title,
-            vote_average: movie.vote_average,
-            likes: 12,
-            fav:true
+        var upd2;
+          // server url to send post request to.
+          let url = 'https://movi-store.herokuapp.com/movies';
+          // storing current movie in a variable.
+          let moviTemp = {
+              id: movie.id,
+              original_language: movie.original_language,
+              poster_path: movie.poster_path,
+              release_date: movie.release_date,
+              title: movie.title,
+              vote_average: movie.vote_average,
+              likes: 12,
+              fav:true
         };
-        // making axios post request.
-        axios.post(url, moviTemp);  
-    };
-
-    const Like = (e, mov) => {
-        var upd;
+        
         storeMovies.map(ele => {
+            upd2 = false;
+            if (ele.id !== movie.id) {
+                upd2 = true; 
+            }
+        });
+        if (upd2 === false) {
+            console.log('already there');
+        } else {
+                // making axios post request.
+                axios.post(url, moviTemp); 
+        }
+    };
+    const Like = (e, mov) => {
+        console.log("at current "+mov.id);
+        var upd;
+        storeMovies.some(ele => {
+            console.log("in Store "+ele.id);
             upd = false;
-            console.log(mov);
-            console.log(ele);
-            
             if (ele.id == mov.id) {
+                console.log('already in the favs ..like');
                 //update action dispatch
                 const moviTemp = {
                     id: mov.id,
@@ -89,20 +99,16 @@ const Tmdb = (props) => {
                     likes:ele.likes+1,
                     fav:true
                 };
-
                 dispatch(updateMovie(mov.id, moviTemp));
                 upd = true;
-            }
-            
+                
+            }  
         });
         if (upd === false) {
             addToFav(e,mov);
         }
-
-
         //dispatch(Liked(movie.id));
     };
-    
     
     return (
         <>
@@ -113,6 +119,9 @@ const Tmdb = (props) => {
                     //conditional rendering using && operator 
                     // will only render of moviess has some data in it..
                         moviess && moviess.map(((movie, index) => {
+                            
+                            if (movie.release_date) { var dateV = new Date(movie.release_date); }
+                            else { var dateV = new Date(movie.first_air_date); }
                             if (index < 21) {
                                 return (
                                     <div className={`${styles.card} m-2`} key={index} style={{ position: "relative" }}>
@@ -126,7 +135,7 @@ const Tmdb = (props) => {
                                             <div style={{ display: 'flex', justifyContent: 'space-between', position: 'absolute', bottom: '0px', color: 'white', left: '0px', width: "100%", backgroundColor: 'rgba(0,0,0,0.8)' }}>
                                                 <Button onClick={(e)=>{Like(e,movie)}} variant='hidden' size='lg' style={{ color: 'white' }}>
                                                     <FaThumbsUp />
-                                                    <i style={{ paddingLeft: '0.2rem', fontSize: '0.8rem' }}> 2k </i>
+                                                    <i style={{ paddingLeft: '0.2rem', fontSize: '0.8rem' }}> {movie.likes} </i>
                                                 </Button>
                                                 <Button onClick={(e)=>{addToFav(e,movie)}} variant='hidden' size='lg' style={{ color: 'white' }}>
                                                     <MdFavorite />
@@ -150,7 +159,7 @@ const Tmdb = (props) => {
                                                     }
                                                 </h4>
                                             </div>
-                                            <p style={{ fontSize: '0.7rem' }}>Release Date: {movie.release_date}</p>
+                                            <p style={{ fontSize: '0.7rem' }}>Release Date: {dateV.getDate() +"-"+ dateV.getMonth() +"-"+ dateV.getFullYear()}</p>
                                             <p style={{ fontSize: '0.7rem' }} >Language:<b> {movie.original_language}</b></p>
                                         </div>
                                     </div>
@@ -168,5 +177,4 @@ const Tmdb = (props) => {
         </>      
     )
 };
-
 export default Tmdb;

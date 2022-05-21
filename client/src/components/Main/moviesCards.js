@@ -20,12 +20,13 @@ const MoviesCategory = () => {
  <div className={`${styles.scr} d-flex flex-row flex-nowrap overflow-auto`} >
               {
                 //   conditional rendering
-                    filteredData && filteredData.map(((movie, index) => {
+                  filteredData && filteredData.map(((movie, index) => {
+                    const dateV = new Date(movie.release_date);
                         if (index < 50) {
                             return (
                                 <div className={`${styles.card} m-2`} key={index} style={{ position: "relative" }}>
                                     <a href={`movies/${movie._id}`}>
-                                        <img src={avatarImg} alt="Avatar" style={{ width: "100%" }}></img>
+                                        <img src={'https://image.tmdb.org/t/p/original' + movie.poster_path} alt="Avatar" style={{ width: "100%" }}></img>
                                     </a>
                                     <div className={styles.container} style={{ position: "relative" }}>
                                         <div className={styles.mName_rating}>
@@ -43,7 +44,7 @@ const MoviesCategory = () => {
                                                 }
                                             </h4>
                                         </div>
-                                        <p style={{ fontSize: '0.7rem' }}>Release Date: {movie.release_date}</p>
+                                        <p style={{ fontSize: '0.7rem' }}>Release Date: {dateV.getDate() +"-"+ dateV.getMonth() +"-"+ dateV.getFullYear()}</p>
                                         <p style={{ fontSize: '0.7rem' }} >Language:<b> {movie.original_language}</b></p>
                                     </div>
                                 </div>

@@ -65,7 +65,7 @@ const Home = () => {
                     </Carousel.Caption>
                 </Carousel.Item>
             </Carousel>
-            // component render
+             {/* component render */}
            <MoviesCards/>
         </>
     );

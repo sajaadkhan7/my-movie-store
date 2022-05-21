@@ -56,9 +56,10 @@ const MoviesCards2 = () => {
             <h2 className="container mt-3"> Search Results </h2>
             <div className={`${styles.scr} d-flex flex-row flex-nowrap overflow-auto`} >
                 {
-                   //conditional render 
+                
                     filteredData && filteredData.map(((movie, index) => {
-                        //only show 20 movies in a row
+                        const dateV = new Date(movie.release_date);
+                       
                         if (index < 21) {
                             return (
                                 <div className={`${styles.card} m-2`} key={index} style={{ position: "relative" }}>
@@ -68,7 +69,7 @@ const MoviesCards2 = () => {
                                         <img src={'https://image.tmdb.org/t/p/original' + movie.poster_path} alt="Avatar" style={{ width: "100%" }}>  
                                         </img>
                                         </a>
-                                        // like and favorite buttons on a movie card 
+                                       
                                         <div style={{ display:'flex',justifyContent:'space-between',position: 'absolute', bottom: '0px', color: 'white', left: '0px', width: "100%", backgroundColor: 'rgba(0,0,0,0.8)' }}>
                                             <Button   variant='hidden' size='lg' style={{color:'white' }}>
                                                 <FaThumbsUp />
@@ -96,7 +97,7 @@ const MoviesCards2 = () => {
                                                     }
                                                 </h4>
                                             </div>
-                                            <p style={{fontSize:'0.7rem'}}>Release Date: {movie.release_date}</p>
+                                            <p style={{fontSize:'0.7rem'}}>Release Date: {dateV.getDate() +"-"+ dateV.getMonth() +"-"+ dateV.getFullYear()}</p>
                                             <p style={{fontSize:'0.7rem'}} >Language:<b> {movie.original_language}</b></p>
                                         </div>
                                 </div>

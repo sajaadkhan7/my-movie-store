@@ -57,7 +57,7 @@ const MovieDetails = () => {
 
     return (
         <>
-            //conditional render
+            {/* conditional render */}
             { movieDetails &&
                 <div className={`${styles.movieD} container-fluid d-md-flex text-white`} style={{backgroundImage: `url('https://image.tmdb.org/t/p/original${movieDetails.poster_path}')`}}>
                     <div className={`${styles.flexItem} d-flex justify-content-center  `}>
@@ -68,7 +68,7 @@ const MovieDetails = () => {
                         <h5>{movieDetails.tagline }</h5>
                         <h5>Genre: {movieDetails.genres.map(item => item.name + " ")} </h5>
                         <h6>User Rating : &nbsp; 
-                        // converting vote average from api response to 5 star rating 
+                       {/* converting vote average from api response to 5 star rating  */}
                             {
                                 
                                 [...Array(Math.round(movieDetails.vote_average/2))].map((ele, i) => (
@@ -81,7 +81,7 @@ const MovieDetails = () => {
                                 ))
                             }
                         </h6>
-                        // youtube link to play trailer..
+                        {/* // youtube link to play trailer.. */}
                         <div>
                             <a className='text-decoration-none' href={`https://youtu.be/${videoDetails[0].key}`} target="_blank">
                                 <b className='h1'><BsPlayCircle /></b>
