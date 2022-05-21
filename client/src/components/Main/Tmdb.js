@@ -146,6 +146,8 @@ const Tmdb = (props) => {
                             
                             if (movie.release_date) { var dateV = new Date(movie.release_date); }
                             else { var dateV = new Date(movie.first_air_date); }
+                            if (movie.title) { var title = movie.title; }
+                            else { var title = movie.original_name; }
                             if (index < 21) {
                                 return (
                                     <div className={`${styles.card} m-2`} key={index} style={{ position: "relative" }}>
@@ -169,7 +171,7 @@ const Tmdb = (props) => {
                                         <div className={styles.container} style={{ position: "relative" }}>
                                             <div className={styles.mName_rating}>
                                                 {/* Rating stars */}
-                                                <h4 className='text-truncate ' style={{ fontSize: "1rem", paddingTop: '0.5rem' }} >{movie.title}</h4>
+                                                <h4 className='text-truncate ' style={{ fontSize: "1rem", paddingTop: '0.5rem' }} >{title }</h4>
                                                 <h4>
                                                     {
                                                         [...Array(Math.round(movie.vote_average / 2))].map((ele, i) => (

@@ -22,7 +22,7 @@ const MoviesCategory = () => {
   }, [movies]);
 
   return (
-    <div className='container'>
+    <div className='container-fluid'>
        <h2 className="container mt-3"> Favourites </h2>
  <div className={`${styles.scr} d-flex flex-row flex-nowrap overflow-auto`} >
               {
@@ -47,25 +47,26 @@ const MoviesCategory = () => {
                                             </div>
                                         </div>
 
-                                    <div className={styles.container} style={{ position: "relative" }}>
-                                        <div className={styles.mName_rating}>
-                                            {/* Rating stars */}
-                                            <h4 className='text-truncate '>{movie.title}</h4><h4>
-                                                {
-                                                    [...Array(Math.round(movie.vote_average / 2))].map((ele, i) => (
-                                                        <b key={i} style={{ fontSize: "1em", color: "#FDCC0D" }}>&#9733;</b>
-                                                    ))
-                                                }
-                                                {
-                                                    [...Array(5 - Math.round(movie.vote_average / 2))].map((ele, i) => (
-                                                        <b key={i} style={{ fontSize: "1em" }}>&#9734;</b>
-                                                    ))
-                                                }
-                                            </h4>
+                                        <div className={styles.container} style={{ position: "relative" }}>
+                                            <div className={styles.mName_rating}>
+                                                {/* Rating stars */}
+                                                <h4 className='text-truncate ' style={{ fontSize: "1rem", paddingTop: '0.5rem' }} >{movie.title}</h4>
+                                                <h4>
+                                                    {
+                                                        [...Array(Math.round(movie.vote_average / 2))].map((ele, i) => (
+                                                            <b key={i} style={{ fontSize: "1rem", color: "#FDCC0D" }}>&#9733;</b>
+                                                        ))
+                                                    }
+                                                    {
+                                                        [...Array(5 - Math.round(movie.vote_average / 2))].map((ele, i) => (
+                                                            <b key={i} style={{ fontSize: "1rem" }}>&#9734;</b>
+                                                        ))
+                                                    }
+                                                </h4>
+                                            </div>
+                                            <p style={{ fontSize: '0.7rem' }}>Release Date: {dateV.getDate() +"-"+ dateV.getMonth() +"-"+ dateV.getFullYear()}</p>
+                                            <p style={{ fontSize: '0.7rem' }} >Language:<b> {movie.original_language}</b></p>
                                         </div>
-                                        <p style={{ fontSize: '0.7rem' }}>Release Date: {dateV.getDate() +"-"+ dateV.getMonth() +"-"+ dateV.getFullYear()}</p>
-                                        <p style={{ fontSize: '0.7rem' }} >Language:<b> {movie.original_language}</b></p>
-                                    </div>
                                 </div>
                             )
                         }
