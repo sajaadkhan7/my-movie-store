@@ -1,5 +1,5 @@
 import axios from 'axios';
-const url = 'https://movi-store.herokuapp.com/movies';
+const url = 'https://movistore.vercel.app/movies';
 //  const url2 = 'https://api.themoviedb.org/3/movie/';
 //  const url2End='?api_key=c1ec99bca4a799530c16fb945021413e&language=en-US&page=1';
 export const fetchMovies = () => axios.get(url);
